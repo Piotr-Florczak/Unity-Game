@@ -38,6 +38,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 1450734921
+    locked: 0
+  - name: Camera
+    uniqueID: 171538415
+    locked: 0
+  - name: Small plants
+    uniqueID: 3283749947
+    locked: 0
+  - name: Small Objects
+    uniqueID: 214206363
+    locked: 0
+  - name: Player
+    uniqueID: 516163361
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
