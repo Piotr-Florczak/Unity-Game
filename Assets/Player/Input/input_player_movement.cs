@@ -43,7 +43,7 @@ public class input_player_movement : MonoBehaviour
         animatorinfo = this.animacja.GetCurrentAnimatorClipInfo(0);
         current_animation = animatorinfo[0].clip.name;
         {
-            Debug.Log(current_animation); 
+            //Debug.Log(current_animation); 
         }
         if (animacja.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && current_animation == "attack_1")
         {
