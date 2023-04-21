@@ -5,30 +5,23 @@ using UnityEngine.InputSystem;
 
 public class input_player_movement : MonoBehaviour
 {
-    
+    Vector2 dane_wejscowe;
     bool is_attack;
-    private bool isOnCooldown = false;
-    private bool isGrounded;
-
-    public float checkRadius = 0.1f;
 
     Rigidbody2D fizyka;
-    Vector2 dane_wejscowe;
+    Transform transformacja;
     Animator animacja;
     PlayerInput player;
+
 
     [SerializeField] float przyspiesznie = 6f;
     [SerializeField] float moc_skoku = 5f;
     [SerializeField] float attackRange = 0.5f;
     public int attakDamage = 40;
 
-    Transform transformacja;
+
     public Transform attack_colider;
-    public Transform groundCheckPoint;
-
     public LayerMask enemyLayers;
-    public LayerMask groundLayer;
-
 
     AnimatorClipInfo[] animatorinfo;
     string current_animation;
@@ -36,7 +29,7 @@ public class input_player_movement : MonoBehaviour
 
     void Start()
     {
-        //pobiernie wszystkich funkcji z komonentï¿½w w grze do zmiennych 
+        //pobiernie wszystkich funkcji z komonentów w grze do zmiennych 
         fizyka = GetComponent<Rigidbody2D>();      // pobiera wszystkie funkcje komponentu "Rigidbody2d" do zmiennej "fizyka itd."
         transformacja = GetComponent<Transform>();
         animacja = GetComponent<Animator>();
@@ -45,10 +38,6 @@ public class input_player_movement : MonoBehaviour
 
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, checkRadius, groundLayer);
-        Debug.Log(isGrounded);
-
-
         movement();
         flip();
         animatorinfo = this.animacja.GetCurrentAnimatorClipInfo(0);
@@ -62,35 +51,34 @@ public class input_player_movement : MonoBehaviour
         }
     }
 
-    void OnMove(InputValue value)             // fukncja wywoï¿½uje siï¿½ automatycznie kiedy zostaje wcisniï¿½ty klwiesz akcji typu W,A,S,D. Oraz przyjmuje (ze ï¿½rodowiska unity) arugumenty typu vector. np kiedy wcisniemy 'D' zmienna typu inputvalue bï¿½dzie siï¿½ rï¿½wnaï¿½ (1,0).
+    void OnMove(InputValue value)             // fukncja wywo³uje siê automatycznie kiedy zostaje wcisniêty klwiesz akcji typu W,A,S,D. Oraz przyjmuje (ze œrodowiska unity) arugumenty typu vector. np kiedy wcisniemy 'D' zmienna typu inputvalue bêdzie siê równaæ (1,0).
     {
-        dane_wejscowe = value.Get<Vector2>(); // zmienna inputvalue dziaï¿½a tylko w ciele funkcji onMove dlatego stworzyï¿½em zmiennï¿½ globalnï¿½ typu Vecotr2 do ktï¿½rej przypisuje te wartoï¿½ci ponadto InputValue jest obiektem ktï¿½ry posiada wile zmiennych, dlatego getem pobieramy zmiennï¿½ typu vacotr
+        dane_wejscowe = value.Get<Vector2>(); // zmienna inputvalue dzia³a tylko w ciele funkcji onMove dlatego stworzy³em zmienn¹ globaln¹ typu Vecotr2 do której przypisuje te wartoœci ponadto InputValue jest obiektem który posiada wile zmiennych, dlatego getem pobieramy zmienn¹ typu vacotr
     }
     void OnJump(InputValue value)
     {
-        if (value.isPressed && isGrounded)
+        if (value.isPressed)
         {
             fizyka.velocity += new Vector2(fizyka.velocity.x, moc_skoku);
         }
     }
     void OnAttack(InputValue value)
     {
-        PerformAttack();
+        is_attack = true;
+        
     }
     void OnAttack_relase(InputValue value)
     {
         //is_attack = false;
     }
-    public void PerformAttack()
-    {
-        if (!isOnCooldown)
-        {
-            animatinon_controler("attack");
-            StartCoroutine(AttackCooldown());
-        }
-    }
     void movement()
     {
+        if (is_attack)
+        {
+            animatinon_controler("attack");
+            attack_checker();
+            is_attack = false;
+        }
         fizyka.velocity = new Vector2(dane_wejscowe.x * przyspiesznie, fizyka.velocity.y);
         if(Mathf.Abs(dane_wejscowe.x) > 0)
         {
@@ -169,7 +157,7 @@ public class input_player_movement : MonoBehaviour
     }
     void attack_checker()
     {
-        Collider2D[] hitEnemis = Physics2D.OverlapCircleAll(attack_colider.position, attackRange, enemyLayers); //do tablicy przypisywane sï¿½ wszystkie obiekty ktï¿½re znajdujï¿½ siï¿½ w zdefiniowanym opszarze
+        Collider2D[] hitEnemis = Physics2D.OverlapCircleAll(attack_colider.position, attackRange, enemyLayers); //do tablicy przypisywane s¹ wszystkie obiekty które znajduj¹ siê w zdefiniowanym opszarze
 
         foreach (Collider2D enemy in hitEnemis)
         {
@@ -185,20 +173,6 @@ public class input_player_movement : MonoBehaviour
         }
         Gizmos.DrawWireSphere(attack_colider.position, attackRange);
     }
-    private IEnumerator AttackCooldown()
-{
-    // Ustaw isOnCooldown na true, aby zablokowaÄ‡ kolejne ataki
-    isOnCooldown = true;
-
-    // WywoÅ‚aj funkcjÄ™ attack_checker() na poczÄ…tku cooldown
-    attack_checker();
-
-    // Poczekaj na zakoÅ„czenie bieÅ¼Ä…cej animacji
-    yield return new WaitForSeconds(animacja.GetCurrentAnimatorStateInfo(0).length * 0.3f);
-
-    // Ustaw isOnCooldown na false, aby odblokowaÄ‡ ataki
-    isOnCooldown = false;
-}
 
 }
 

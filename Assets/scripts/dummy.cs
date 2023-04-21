@@ -20,8 +20,6 @@ public class dummy : MonoBehaviour
         
         GameObject points = Instantiate(animacja_napisu, position, Quaternion.identity) as GameObject;
         points.transform.GetChild(0).GetComponent<TextMeshPro>().text=Random.Range(5,15).ToString();
-        StartCoroutine(RemoveAfterAnimation(points));
-
         if (currentHealth <= 0)
         {
             Die();
@@ -37,17 +35,5 @@ public class dummy : MonoBehaviour
     {
         
     }
-    private IEnumerator RemoveAfterAnimation(GameObject child)  
-    {
-    // Pobierz Animator komponent
-    Animator animator = child.GetComponent<Animator>();
-
-    // Czekaj na zakończenie animacji
-    yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-
-    // Usuń obiekt z hierarchii sceny
-    Destroy(child);
-    }
-
 
 }
