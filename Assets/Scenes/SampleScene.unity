@@ -153,6 +153,9 @@ GameObject:
   - component: {fileID: 35008489}
   - component: {fileID: 35008488}
   - component: {fileID: 35008487}
+  - component: {fileID: 35008490}
+  - component: {fileID: 35008491}
+  - component: {fileID: 35008492}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -238,12 +241,77 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 35008486}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.37, y: 2.37, z: 0}
+  m_LocalPosition: {x: 3.17, y: 2.19, z: 0}
   m_LocalScale: {x: 4.5123706, y: 4.5450015, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &35008490
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35008486}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.007371798, y: 0.0031366348}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.32}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.26313248, y: 0.16735196}
+  m_EdgeRadius: 0
+--- !u!50 &35008491
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35008486}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 3.17
+  m_LinearDrag: 0
+  m_AngularDrag: 17.61
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &35008492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35008486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 075c28e56eb34324c81631da0a5386f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3.78
+  jumpForce: 4.4
+  groundCheckDistance: 23.98
+  edgeCheckDistance: 1
+  jumpIntervalMin: 0.67
+  jumpIntervalMax: 3.59
 --- !u!1 &55172896
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,6 +475,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &242848328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 242848329}
+  m_Layer: 0
+  m_Name: ground_colider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &242848329
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242848328}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.171, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1465753600}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &293425960
 GameObject:
@@ -1134,7 +1232,7 @@ GameObject:
   - component: {fileID: 1165364446}
   - component: {fileID: 1165364449}
   - component: {fileID: 1165364448}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: World
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3503,14 +3601,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b536028883d62b04b959088c0065dddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkRadius: 0.1
   przyspiesznie: 6
   moc_skoku: 5
   attackRange: 0.5
   attakDamage: 40
   attack_colider: {fileID: 1036854395}
+  groundCheckPoint: {fileID: 242848329}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &1465753595
 MonoBehaviour:
   m_ObjectHideFlags: 0
