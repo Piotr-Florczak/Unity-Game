@@ -20,11 +20,10 @@ public class robaczek : MonoBehaviour
     private Vector2 originalVelocity;
     private Rigidbody2D rb;
     private float direction = 1.0f; 
-    private float timeUntilNextJump;
     public bool isFreezeMovementRoutineActive = false;
 
     public GameObject  animacja_napisu;
-    private Vector2 position;
+    Vector2 position;
     Transform transformacja;
 
     public float freezeDuration = 2.0f;
@@ -96,15 +95,17 @@ public class robaczek : MonoBehaviour
         Gizmos.DrawLine(transform.position + new Vector3(0, -0.5f, 0), transform.position + new Vector3(0, -0.5f, 0) + new Vector3(direction, 0, 0) * edgeCheckDistance);
         Gizmos.DrawLine(transform.position + new Vector3(0, 0.5f, 0), transform.position + new Vector3(0, 0.5f, 0) + new Vector3(direction, 0, 0) * edgeCheckDistance);
     }
+
     public void takeDamage(int damage)
     {
         position = new Vector2(transform.position.x - 0.7f, transform.position.y+1.2f);
         currentHealth -= damage;
         Debug.Log("?");
-        healthBar.SetHeath(currentHealth);
         
+        healthBar.SetHeath(currentHealth);
+        position = new Vector2 (transformacja.position.x,transformacja.position.y);
         GameObject points = Instantiate(animacja_napisu, position, Quaternion.identity) as GameObject;
-        points.transform.GetChild(0).GetComponent<TextMeshPro>().text=Random.Range(5,15).ToString();
+        points.transform.GetChild(0).GetComponent<TextMeshPro>().text=damage.ToString();
         StartCoroutine(RemoveAfterAnimation(points));
         if (currentHealth <= 0)
         {
@@ -144,12 +145,7 @@ public class robaczek : MonoBehaviour
     {
         Debug.Log("Enemy died!");
 
-        //ty to zrub
-
-
-
-
-
+        Destroy(gameObject);
     }
 
 }

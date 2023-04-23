@@ -5,13 +5,7 @@ using UnityEngine.UI;
 public class Health_bar : MonoBehaviour
 {
 
-    Slider slider;
-
-    void Start()
-    {
-        slider = GetComponent<Slider>();
-    }
-
+    public Slider slider;
 
     public void SetMaxHealth(int health)
     {
