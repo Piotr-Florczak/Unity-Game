@@ -68,9 +68,9 @@ public class input_player_movement : MonoBehaviour
         }
     }
 
-    void OnMove(InputValue value)             // fukncja wywo�uje si� automatycznie kiedy zostaje wcisni�ty klwiesz akcji typu W,A,S,D. Oraz przyjmuje (ze �rodowiska unity) arugumenty typu vector. np kiedy wcisniemy 'D' zmienna typu inputvalue b�dzie si� r�wna� (1,0).
+    void OnMove(InputValue value)             
     {
-        dane_wejscowe = value.Get<Vector2>(); // zmienna inputvalue dzia�a tylko w ciele funkcji onMove dlatego stworzy�em zmienn� globaln� typu Vecotr2 do kt�rej przypisuje te warto�ci ponadto InputValue jest obiektem kt�ry posiada wile zmiennych, dlatego getem pobieramy zmienn� typu vacotr
+        dane_wejscowe = value.Get<Vector2>(); 
     }
     void OnJump(InputValue value)
     {
@@ -213,7 +213,7 @@ public class input_player_movement : MonoBehaviour
         foreach (Collider2D enemy in hitEnemis)
         {
             Debug.Log("We hit" + enemy.name);
-            enemy.GetComponent<dummy>().takeDamage(attakDamage);
+            enemy.GetComponent<robaczek>().takeDamage(attakDamage);
         }
     }
 
