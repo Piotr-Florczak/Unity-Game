@@ -419,6 +419,7 @@ MonoBehaviour:
   jumpForce: 4.4
   groundCheckDistance: 23.98
   edgeCheckDistance: 1
+  view_distance: 8
   isFreezeMovementRoutineActive: 0
   animacja_napisu: {fileID: 0}
   freezeDuration: 1
@@ -426,6 +427,9 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 6521475563291116690}
+  Layer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &6521475563291116689
 GameObject:
   m_ObjectHideFlags: 0

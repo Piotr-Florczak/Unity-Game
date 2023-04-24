@@ -39,8 +39,8 @@ public class input_player_movement : MonoBehaviour
 
     void Start()
     {
-        //pobiernie wszystkich funkcji z komonent�w w grze do zmiennych 
-        fizyka = GetComponent<Rigidbody2D>();      // pobiera wszystkie funkcje komponentu "Rigidbody2d" do zmiennej "fizyka itd."
+        
+        fizyka = GetComponent<Rigidbody2D>();
         transformacja = GetComponent<Transform>();
         animacja = GetComponent<Animator>();
 
@@ -208,7 +208,7 @@ public class input_player_movement : MonoBehaviour
 
     void attack_checker()
     {
-        Collider2D[] hitEnemis = Physics2D.OverlapCircleAll(attack_colider.position, attackRange, enemyLayers); //do tablicy przypisywane s� wszystkie obiekty kt�re znajduj� si� w zdefiniowanym opszarze
+        Collider2D[] hitEnemis = Physics2D.OverlapCircleAll(attack_colider.position, attackRange, enemyLayers); //do tablicy przypisywane sa wszystkie obiekty ktore znajduja sie w zdefiniowanym opszarze
 
         foreach (Collider2D enemy in hitEnemis)
         {
@@ -224,6 +224,12 @@ public class input_player_movement : MonoBehaviour
             return;
         }
         Gizmos.DrawWireSphere(attack_colider.position, attackRange);
+    }
+
+
+    public void test()
+    {
+        //Debug.Log("ja tez cie widze");
     }
 
     
