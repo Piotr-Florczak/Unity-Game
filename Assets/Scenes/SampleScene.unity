@@ -612,8 +612,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6521475563004833837, guid: 3ad0684ad500b0441a6face925dde1e8, type: 3}
+      propertyPath: maxHealth
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6521475563004833837, guid: 3ad0684ad500b0441a6face925dde1e8, type: 3}
+      propertyPath: puschDecay
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6521475563004833837, guid: 3ad0684ad500b0441a6face925dde1e8, type: 3}
       propertyPath: Layer.m_Bits
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6521475563004833837, guid: 3ad0684ad500b0441a6face925dde1e8, type: 3}
+      propertyPath: puschStrange
+      value: 498
       objectReference: {fileID: 0}
     - target: {fileID: 6521475563004833837, guid: 3ad0684ad500b0441a6face925dde1e8, type: 3}
       propertyPath: animacja_napisu

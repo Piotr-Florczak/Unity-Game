@@ -6,10 +6,10 @@ using TMPro;
 public class robaczek : MonoBehaviour
 {
     [SerializeField]
-    private float speed = 1.0f; // Szybkość ruchu przeciwnika
+    private float speed = 1.0f;
 
     [SerializeField]
-    private float jumpForce = 5.0f; // Siła skoku przeciwnika
+    private float jumpForce = 5.0f; 
 
     [SerializeField]
     private float groundCheckDistance = 0.5f; 
@@ -18,30 +18,46 @@ public class robaczek : MonoBehaviour
     private float edgeCheckDistance = 1.0f;
 
     [SerializeField]
-    private int view_distance = 8; 
+    private int view_distance = 8;
+
+    [SerializeField]
+    private bool isFreezeMovementRoutineActive = false;
+
+    [SerializeField]
+    private bool Is_Rage_mode;
+
+    [SerializeField]
+    private bool Is_On_stunded;
+
+    [SerializeField]
+    private bool isPushed;
+
+    [SerializeField]
+    private float puschStrange;
+
+    [SerializeField]
+    private float puschDecay;
 
     private Vector2 originalVelocity;
     private Rigidbody2D rb;
-    private float direction = 1.0f; 
-    public bool isFreezeMovementRoutineActive = false;
-    public bool Is_Rage_mode;
 
     public GameObject  animacja_napisu;
     Vector2 position;
     Transform transformacja;
+
+    private float direction = 1.0f;
+    private float horizontalDifference;
 
     public float freezeDuration = 2.0f;
     public float freezeInterval = 5.0f;
 
     public int maxHealth = 100;
     public int currentHealth;
-    float horizontalDifference;
 
     public Health_bar healthBar;
     public LayerMask Layer;
 
     public List<Collider2D> players = new List<Collider2D>();
-
 
     private void Start()
     {
@@ -59,18 +75,11 @@ public class robaczek : MonoBehaviour
         flip();
         if (!Is_Rage_mode)
         {
-            if(!isFreezeMovementRoutineActive)
-                {
-                    rb.velocity = new Vector2(speed * direction, rb.velocity.y);
-                }
-            if (rb.velocity.x == 0 && !isFreezeMovementRoutineActive)
-                {
-                    Debug.Log("awaryjne pchnięcie");
-                    rb.AddForce(transform.up * speed);
-                }
+            if(!isFreezeMovementRoutineActive && !Is_On_stunded)
+            {
+                rb.velocity = new Vector2(speed * direction, rb.velocity.y);
+            }
         }
-        
-
         RaycastHit2D hitGround = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance);
 
         Vector2 edgeCheckDirection = new Vector2(direction, 0);
@@ -100,21 +109,32 @@ public class robaczek : MonoBehaviour
             if( players[0].gameObject.transform.position.x > transform.position.x)
             {
                 direction = 1;
-                
-
             }
             else 
             {
                 direction = -1;
 
             }
+            if (!Is_On_stunded)
+            {
+                rb.velocity = new Vector2((speed * 1.2f) * direction, rb.velocity.y);
+            }
+            if(Is_On_stunded)
+            {
+                rb.AddForce(new Vector2(-puschStrange * direction, 0), ForceMode2D.Impulse);
 
-            rb.velocity = new Vector2((speed*1.2f) * direction, rb.velocity.y);
+                isPushed = true;
 
-             if (rb.velocity == new Vector2(0,0) && !isFreezeMovementRoutineActive)
+                if (isPushed)
                 {
-                    rb.AddForce(transform.up * speed);
+                    rb.velocity = new Vector2(rb.velocity.x * (1 - puschDecay * Time.deltaTime), rb.velocity.y);
+
+                    if (Mathf.Abs(rb.velocity.x) <= speed)
+                    {
+                        isPushed = false;
+                    }
                 }
+            }
         }
         else 
         {
@@ -148,7 +168,10 @@ public class robaczek : MonoBehaviour
     {
         position = new Vector2(transform.position.x - 0.7f, transform.position.y+1.2f);
         currentHealth -= damage;
+
+        StartCoroutine(StundedDuration(2.5f)); //wyłącza ruch gracza
         
+
         healthBar.SetHeath(currentHealth);
         position = new Vector2 (transformacja.position.x,transformacja.position.y);
         GameObject points = Instantiate(animacja_napisu, position, Quaternion.identity) as GameObject;
@@ -166,6 +189,13 @@ public class robaczek : MonoBehaviour
         Animator animator = child.GetComponent<Animator>();
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         Destroy(child);
+    }
+
+    private IEnumerator StundedDuration(float s)
+    {
+        Is_On_stunded = true;
+        yield return new WaitForSeconds(s);
+        Is_On_stunded = false;
     }
 
     private IEnumerator FreezeMovementRoutine()
