@@ -36,19 +36,27 @@ public class input_player_movement : MonoBehaviour
     AnimatorClipInfo[] animatorinfo;
     string current_animation;
 
+    public int maxHealth = 100;
+    public int currentHealth;
+
+    public Health_bar healthBar;
+
 
     void Start()
     {
-        
         fizyka = GetComponent<Rigidbody2D>();
         transformacja = GetComponent<Transform>();
         animacja = GetComponent<Animator>();
 
+        currentHealth = maxHealth;
+
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, checkRadius, groundLayer);
+        healthBar.SetHeath(currentHealth);
         movement();
         flip();
         animatorinfo = this.animacja.GetCurrentAnimatorClipInfo(0);
