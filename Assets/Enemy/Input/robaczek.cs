@@ -38,6 +38,9 @@ public class robaczek : MonoBehaviour
     [SerializeField]
     private float puschDecay;
 
+    [SerializeField]
+    private float time;
+
     private Vector2 originalVelocity;
     private Rigidbody2D rb;
 
@@ -169,7 +172,7 @@ public class robaczek : MonoBehaviour
         position = new Vector2(transform.position.x - 0.7f, transform.position.y+1.2f);
         currentHealth -= damage;
 
-        StartCoroutine(StundedDuration(2.5f)); //wyłącza ruch gracza
+        StartCoroutine(StundedDuration(time)); //wyłącza ruch gracza
         
 
         healthBar.SetHeath(currentHealth);

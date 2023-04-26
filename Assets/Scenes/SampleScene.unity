@@ -603,30 +603,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6521475563004833833, guid: 3ad0684ad500b0441a6face925dde1e8, type: 3}
-      propertyPath: m_SortingOrder
-      value: 101
-      objectReference: {fileID: 0}
-    - target: {fileID: 6521475563004833835, guid: 3ad0684ad500b0441a6face925dde1e8, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6521475563004833837, guid: 3ad0684ad500b0441a6face925dde1e8, type: 3}
-      propertyPath: maxHealth
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 6521475563004833837, guid: 3ad0684ad500b0441a6face925dde1e8, type: 3}
-      propertyPath: puschDecay
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 6521475563004833837, guid: 3ad0684ad500b0441a6face925dde1e8, type: 3}
-      propertyPath: Layer.m_Bits
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6521475563004833837, guid: 3ad0684ad500b0441a6face925dde1e8, type: 3}
-      propertyPath: puschStrange
-      value: 498
-      objectReference: {fileID: 0}
     - target: {fileID: 6521475563004833837, guid: 3ad0684ad500b0441a6face925dde1e8, type: 3}
       propertyPath: animacja_napisu
       value: 
@@ -3618,7 +3594,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6521475563004833832, guid: 3ad0684ad500b0441a6face925dde1e8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 48.57
+      value: 33.25
       objectReference: {fileID: 0}
     - target: {fileID: 6521475563004833832, guid: 3ad0684ad500b0441a6face925dde1e8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3666,27 +3642,6 @@ PrefabInstance:
       objectReference: {fileID: 480464896}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ad0684ad500b0441a6face925dde1e8, type: 3}
---- !u!1 &1597321503 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6521475563004833831, guid: 3ad0684ad500b0441a6face925dde1e8, type: 3}
-  m_PrefabInstance: {fileID: 514681049}
-  m_PrefabAsset: {fileID: 0}
---- !u!58 &1597321510
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1597321503}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.0026293595}
-  serializedVersion: 2
-  m_Radius: 0.07385855
 --- !u!1 &1661912451
 GameObject:
   m_ObjectHideFlags: 0

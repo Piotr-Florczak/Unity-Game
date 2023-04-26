@@ -190,7 +190,7 @@ public class input_player_movement : MonoBehaviour
             animacja.SetBool("Fallen", false);
             animacja.SetBool("Jump", false);
             animacja.SetBool("Running", false);
-
+            animacja.SetBool("attack(2)", false);
         }
     }
 
