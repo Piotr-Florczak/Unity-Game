@@ -47,12 +47,14 @@ public class player_animator_controller : MonoBehaviour
             if (isAttack1)
             {
                 anim.SetTrigger("Attack1Trigger");
+                anim.ResetTrigger("IDLE");
                 StartCoroutine(AttackCooldown());
             }
             else
             {   
                 anim.SetTrigger("Attack2Trigger");
                 StartCoroutine(AttackCooldown());
+                anim.ResetTrigger("IDLE");
             }
         }
 
@@ -63,14 +65,17 @@ public class player_animator_controller : MonoBehaviour
         if(rb.velocity.y > 1 )
         {
             anim.SetTrigger("Jump");
+            anim.ResetTrigger("Running");
         }
         if(rb.velocity.y < -1 && !isGrounded )
         {
             anim.SetTrigger("Fall");
+            anim.ResetTrigger("Running");
 
         }
         if((rb.velocity.y == 0 && rb.velocity.x == 0) && isGrounded && isOnCooldown)
         {
+            anim.ResetTrigger("Fall");
             anim.SetTrigger("IDLE");
         }
     }
@@ -80,7 +85,7 @@ public class player_animator_controller : MonoBehaviour
         isOnCooldown = false;
         if (current_animation == "attack_1" || current_animation == "attack_2")
         {
-            yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length+ 0.09f);
+            yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
         }
         isOnCooldown = true;
     }

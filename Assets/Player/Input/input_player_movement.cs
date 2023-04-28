@@ -98,10 +98,10 @@ public class input_player_movement : MonoBehaviour
     }
     void OnAttack(InputValue value)
     {
-        if (!isOnCooldown)
-        {  
-            StartCoroutine(AttackCooldown());
-        }
+       // if (!isOnCooldown)
+       // {  
+        //    StartCoroutine(AttackCooldown());
+       // }
         is_attack = true;
 
     }
