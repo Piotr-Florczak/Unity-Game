@@ -51,8 +51,14 @@ public class input_player_movement : MonoBehaviour
         transformacja = GetComponent<Transform>();
         animacja = GetComponent<Animator>();
 
+        InvokeRepeating("test1",0.0f,0.001f);
+
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+    }
+    void test1()
+    {
+        animation_controller.controller(dane_wejscowe,isGrounded,is_attack);
     }
 
     void Update()
@@ -61,7 +67,6 @@ public class input_player_movement : MonoBehaviour
         healthBar.SetHeath(currentHealth);
         movement();
         flip();
-        animation_controller.controller(dane_wejscowe,isGrounded,is_attack);
     }
 
     // movement -----------------------------
@@ -96,33 +101,8 @@ public class input_player_movement : MonoBehaviour
             fizyka.velocity += new Vector2(fizyka.velocity.x, moc_skoku);
         }
     }
-    void OnAttack(InputValue value)
-    {
-       // if (!isOnCooldown)
-       // {  
-        //    StartCoroutine(AttackCooldown());
-       // }
-        is_attack = true;
-
-    }
-    void OnAttack_relase(InputValue value)
-    {
-        is_attack = false;
-    }
-
     //attack logic -------------------------------
-
-    private IEnumerator AttackCooldown()
-    {
-        isOnCooldown = true;
-
-        attack_checker();
-
-        yield return new WaitForSeconds(animacja.GetCurrentAnimatorStateInfo(0).length * 0.4f);
-
-        isOnCooldown = false;
-    }
-    void attack_checker()
+    public void attack_checker()
     {
         Collider2D[] hitEnemis = Physics2D.OverlapCircleAll(attack_colider.position, attackRange, enemyLayers); //do tablicy przypisywane sa wszystkie obiekty ktore znajduja sie w zdefiniowanym opszarze
 

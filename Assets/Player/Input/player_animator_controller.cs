@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class player_animator_controller : MonoBehaviour
 {
+    input_player_movement movement_player;
     Animator anim;
     Rigidbody2D rb;
     Vector2 dane_wejscowe;
@@ -11,54 +13,64 @@ public class player_animator_controller : MonoBehaviour
 
     string current_animation;
     [SerializeField] private bool isAttack1 = false;
-    private bool isOnCooldown = true;
+    public bool freeze_attack = false;
+    public bool freeze_IDLE = false;
+    public float sec = 2.0f;
 
     void Start()
     {
+        movement_player = GetComponent<input_player_movement>();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        
+        InvokeRepeating("test3",0.0f,0.001f);
     }
 
-    void FixedUpdate()
+    void test3()
     {
-
         animatorinfo = this.anim.GetCurrentAnimatorClipInfo(0);
         current_animation = animatorinfo[0].clip.name;
         if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && current_animation == "attack_1")
         {
-            anim.SetTrigger("IDLE");
             isAttack1 = !isAttack1;
+            anim.SetTrigger("IDLE");
         }
         if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && current_animation == "attack_2")
         {
-            anim.SetTrigger("IDLE");
             isAttack1 = !isAttack1;
-
+            anim.SetTrigger("IDLE");
         }
+    }
+    void OnAttack(InputValue value)
+    {
+        freeze_IDLE = true;
+        if(!freeze_attack)
+        {
+            movement_player.attack_checker();
+            if (isAttack1)
+            {
+                anim.ResetTrigger("IDLE");
+                anim.SetTrigger("Attack1Trigger");
+                StartCoroutine(AttackCooldown());
+               
+            }
+            else
+            {
+                anim.ResetTrigger("IDLE");
+                anim.SetTrigger("Attack2Trigger");
+                StartCoroutine(AttackCooldown());
+                
+            }
+        }
+
+    }
+    void OnWSAD_relase(InputValue value)
+    {
+        sec = 0.0f;
     }
     public void controller(Vector2 dane_wejscowe, bool isGrounded,bool is_attack)
     {
-        Debug.Log(isOnCooldown);
         
-
-        if(is_attack && isOnCooldown)
-        {
-            if (isAttack1)
-            {
-                anim.SetTrigger("Attack1Trigger");
-                anim.ResetTrigger("IDLE");
-                StartCoroutine(AttackCooldown());
-            }
-            else
-            {   
-                anim.SetTrigger("Attack2Trigger");
-                StartCoroutine(AttackCooldown());
-                anim.ResetTrigger("IDLE");
-            }
-        }
-
-        if (Mathf.Abs(dane_wejscowe.x ) > 0 && isGrounded && isOnCooldown)
+        if (Mathf.Abs(dane_wejscowe.x ) > 0 && isGrounded )
         {
             anim.SetTrigger("Running");
         }
@@ -73,7 +85,7 @@ public class player_animator_controller : MonoBehaviour
             anim.ResetTrigger("Running");
 
         }
-        if((rb.velocity.y == 0 && rb.velocity.x == 0) && isGrounded && isOnCooldown)
+        if((rb.velocity.y == 0 && rb.velocity.x == 0) && isGrounded && !freeze_IDLE)
         {
             anim.ResetTrigger("Fall");
             anim.SetTrigger("IDLE");
@@ -82,12 +94,13 @@ public class player_animator_controller : MonoBehaviour
 
     private IEnumerator AttackCooldown()
     {
-        isOnCooldown = false;
-        if (current_animation == "attack_1" || current_animation == "attack_2")
+       freeze_attack = true;
         {
-            yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
+            yield return new WaitForSeconds(0.42f);
         }
-        isOnCooldown = true;
+        
+       freeze_attack = false;
+       freeze_IDLE = false;
     }
 
     public void test()
