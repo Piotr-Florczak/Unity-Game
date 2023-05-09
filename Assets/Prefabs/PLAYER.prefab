@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 242848329}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ground_colider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1036854395}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: attack_colider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,8 @@ GameObject:
   - component: {fileID: 1465753598}
   - component: {fileID: 1465753594}
   - component: {fileID: 1465753595}
-  m_Layer: 0
+  - component: {fileID: 996206773}
+  m_Layer: 3
   m_Name: PLAYER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +188,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &1465753598
 CapsuleCollider2D:
@@ -217,6 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b536028883d62b04b959088c0065dddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttack1: 1
   checkRadius: 0.1
   przyspiesznie: 5.93
   moc_skoku: 5
@@ -230,6 +232,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
+  maxHealth: 100
+  currentHealth: -40
+  healthBar: {fileID: 0}
 --- !u!114 &1465753595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,3 +265,19 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &996206773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4595219751919551607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cdf8c5f119bb244294ecc54854805b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAttack1: 0
+  freeze_attack: 0
+  freeze_IDLE: 0
+  sec: 2

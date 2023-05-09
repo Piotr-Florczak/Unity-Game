@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4704741546865023152}
   - component: {fileID: 2014414580902784710}
   - component: {fileID: 6917792288717539079}
+  - component: {fileID: 3455489687197225693}
+  - component: {fileID: 1320073877}
   m_Layer: 3
   m_Name: Bullet
   m_TagString: Untagged
@@ -121,3 +123,36 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.07
+--- !u!114 &3455489687197225693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90326147934424884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05cc1f6fca5d0404aaa23522735bda32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  gracz: {fileID: 1465753594, guid: 28629a8fd280f6d4783bfbff6d4a4c80, type: 3}
+--- !u!95 &1320073877
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90326147934424884}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 96ec1171f99e5814097c6138ab8425a1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

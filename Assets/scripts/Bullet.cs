@@ -8,16 +8,27 @@ public class Bullet : MonoBehaviour
     Rigidbody2D rb;
     Animator anim;
     AnimatorClipInfo[] animatorinfo;
+    string current_animation;
+    public input_player_movement gracz;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         rb.velocity = new Vector2 (-1f,0) * speed;
     }
+    void FixedUpdate()
+    {
+        animatorinfo = this.anim.GetCurrentAnimatorClipInfo(0);
+        current_animation = animatorinfo[0].clip.name;
+        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && current_animation == "destory")
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void OnTriggerEnter2D (Collider2D hitInfo)
     {
-        Debug.Log(hitInfo.name);
         if (hitInfo.name == "PLAYER")
         {
             anim.SetTrigger("destory");

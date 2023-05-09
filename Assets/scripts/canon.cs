@@ -6,11 +6,12 @@ public class canon : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject bulletPrefab;
+    public float duration = 0.5f; 
 
     // Update is called once per frame
     void Start()
     {
-        InvokeRepeating("Shoot",1.0f,1.5f);
+        InvokeRepeating("Shoot",1.0f,duration);
     }
 
     void Shoot()

@@ -128,6 +128,14 @@ public class input_player_movement : MonoBehaviour
     {
         //Debug.Log("ja tez cie widze");
     }
+    void OnTriggerEnter2D (Collider2D hitInfo)
+    {
+        Debug.Log(hitInfo.name);
+        if (hitInfo.name=="Bullet(Clone)")
+        {
+            currentHealth = currentHealth - 10;
+        }
+    }
 }
 
 
