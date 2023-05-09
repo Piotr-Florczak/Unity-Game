@@ -33,11 +33,13 @@ public class player_animator_controller : MonoBehaviour
         {
             isAttack1 = !isAttack1;
             anim.SetTrigger("IDLE");
+            Debug.Log("E");
         }
         if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && current_animation == "attack_2")
         {
             isAttack1 = !isAttack1;
             anim.SetTrigger("IDLE");
+            Debug.Log("E");
         }
     }
     void OnAttack(InputValue value)
@@ -63,16 +65,19 @@ public class player_animator_controller : MonoBehaviour
         }
 
     }
-    void OnWSAD_relase(InputValue value)
-    {
-        sec = 0.0f;
-    }
     public void controller(Vector2 dane_wejscowe, bool isGrounded,bool is_attack)
     {
         
-        if (Mathf.Abs(dane_wejscowe.x ) > 0 && isGrounded )
+        if (Mathf.Abs(dane_wejscowe.x ) > 0 && isGrounded)
         {
-            anim.SetTrigger("Running");
+            if(freeze_attack)
+            {
+                anim.ResetTrigger("Running");
+            }
+            else
+            {
+                anim.SetTrigger("Running");
+            }
         }
         if(rb.velocity.y > 1 )
         {
@@ -96,7 +101,7 @@ public class player_animator_controller : MonoBehaviour
     {
        freeze_attack = true;
         {
-            yield return new WaitForSeconds(0.42f);
+            yield return new WaitForSeconds(0.44f);
         }
         
        freeze_attack = false;

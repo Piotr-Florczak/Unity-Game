@@ -128,9 +128,6 @@ public class input_player_movement : MonoBehaviour
     {
         //Debug.Log("ja tez cie widze");
     }
-
-    
-
 }
 
 
