@@ -53,14 +53,12 @@ public class player_animator_controller : MonoBehaviour
                 anim.ResetTrigger("IDLE");
                 anim.SetTrigger("Attack1Trigger");
                 StartCoroutine(AttackCooldown());
-               
             }
             else
             {
                 anim.ResetTrigger("IDLE");
                 anim.SetTrigger("Attack2Trigger");
                 StartCoroutine(AttackCooldown());
-                
             }
         }
 
@@ -106,10 +104,5 @@ public class player_animator_controller : MonoBehaviour
         
        freeze_attack = false;
        freeze_IDLE = false;
-    }
-
-    public void test()
-    {
-        Debug.Log("test");
     }
 }

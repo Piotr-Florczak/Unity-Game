@@ -109704,9 +109704,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1320073877, guid: 468f4a5e543a6e846b572dbda190777f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 96ec1171f99e5814097c6138ab8425a1, type: 2}
     - target: {fileID: 90326147934424884, guid: 468f4a5e543a6e846b572dbda190777f, type: 3}
       propertyPath: m_Name
       value: Bullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 2014414580902784710, guid: 468f4a5e543a6e846b572dbda190777f, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3455489687197225693, guid: 468f4a5e543a6e846b572dbda190777f, type: 3}
+      propertyPath: speed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8471081462164436876, guid: 468f4a5e543a6e846b572dbda190777f, type: 3}
       propertyPath: m_RootOrder

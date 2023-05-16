@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
     AnimatorClipInfo[] animatorinfo;
     string current_animation;
     public input_player_movement gracz;
+    bool istouching = false;
     
     void Start()
     {
@@ -21,9 +22,11 @@ public class Bullet : MonoBehaviour
     {
         animatorinfo = this.anim.GetCurrentAnimatorClipInfo(0);
         current_animation = animatorinfo[0].clip.name;
-        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && current_animation == "destory")
+
+         if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && current_animation == "destory")
         {
             Destroy(gameObject);
+
         }
     }
 
@@ -31,6 +34,8 @@ public class Bullet : MonoBehaviour
     {
         if (hitInfo.name == "PLAYER")
         {
+            istouching = true;
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
             anim.SetTrigger("destory");
         }
         

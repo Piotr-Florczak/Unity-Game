@@ -46,7 +46,7 @@ public class input_player_movement : MonoBehaviour
     void Start()
     {
         animation_controller = GetComponent<player_animator_controller>();
-        animation_controller.test();
+        //animation_controller.test();
         fizyka = GetComponent<Rigidbody2D>();
         transformacja = GetComponent<Transform>();
         animacja = GetComponent<Animator>();
@@ -130,7 +130,6 @@ public class input_player_movement : MonoBehaviour
     }
     void OnTriggerEnter2D (Collider2D hitInfo)
     {
-        Debug.Log(hitInfo.name);
         if (hitInfo.name=="Bullet(Clone)")
         {
             currentHealth = currentHealth - 10;
