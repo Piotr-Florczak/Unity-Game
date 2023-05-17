@@ -226,6 +226,7 @@ public class robaczek : MonoBehaviour
         Debug.Log("Enemy died!");
 
         Destroy(gameObject);
+        
     }
 
 }

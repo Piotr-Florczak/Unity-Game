@@ -69,8 +69,13 @@ public class input_player_movement : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, checkRadius, groundLayer);
         healthBar.SetHeath(currentHealth);
-        if (currentHealth == 0 || currentHealth < 0) {death = true; gameObject.GetComponent<CapsuleCollider2D>().enabled = false;  gameObject.GetComponent<BoxCollider2D>().enabled = true; SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
-}
+        if (currentHealth == 0 || currentHealth < 0) 
+        {
+            death = true; gameObject.GetComponent<CapsuleCollider2D>().enabled = false;  
+            gameObject.GetComponent<BoxCollider2D>().enabled = true; 
+            StartCoroutine(chscene());
+
+        }
         movement();
         flip();
     }
@@ -140,6 +145,12 @@ public class input_player_movement : MonoBehaviour
         {
             currentHealth = currentHealth - 10;
         }
+    }
+     private IEnumerator chscene()
+    {
+        yield return new WaitForSeconds(2.00f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
+
     }
     
 }
