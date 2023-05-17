@@ -33,19 +33,17 @@ public class player_animator_controller : MonoBehaviour
         {
             isAttack1 = !isAttack1;
             anim.SetTrigger("IDLE");
-            Debug.Log("E");
         }
         if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && current_animation == "attack_2")
         {
             isAttack1 = !isAttack1;
             anim.SetTrigger("IDLE");
-            Debug.Log("E");
         }
     }
     void OnAttack(InputValue value)
     {
         freeze_IDLE = true;
-        if(!freeze_attack)
+        if(!freeze_attack && !movement_player.death)
         {
             movement_player.attack_checker();
             if (isAttack1)
@@ -66,7 +64,7 @@ public class player_animator_controller : MonoBehaviour
     public void controller(Vector2 dane_wejscowe, bool isGrounded,bool is_attack)
     {
         
-        if (Mathf.Abs(dane_wejscowe.x ) > 0 && isGrounded)
+        if (Mathf.Abs(dane_wejscowe.x ) > 0 && isGrounded && !movement_player.death )
         {
             if(freeze_attack)
             {
@@ -77,21 +75,26 @@ public class player_animator_controller : MonoBehaviour
                 anim.SetTrigger("Running");
             }
         }
-        if(rb.velocity.y > 1 )
+        if(rb.velocity.y > 1 && !movement_player.death )
         {
             anim.SetTrigger("Jump");
             anim.ResetTrigger("Running");
         }
-        if(rb.velocity.y < -1 && !isGrounded )
+        if(rb.velocity.y < -1 && !isGrounded && !movement_player.death )
         {
             anim.SetTrigger("Fall");
             anim.ResetTrigger("Running");
 
         }
-        if((rb.velocity.y == 0 && rb.velocity.x == 0) && isGrounded && !freeze_IDLE)
+        if((rb.velocity.y == 0 && rb.velocity.x == 0) && isGrounded && !freeze_IDLE && !movement_player.death)
         {
             anim.ResetTrigger("Fall");
             anim.SetTrigger("IDLE");
+        }
+        if(movement_player.death)
+        {
+            anim.ResetTrigger("IDLE");
+            anim.SetTrigger("death");
         }
     }
 

@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 7963228640981619052}
   - component: {fileID: 1348575858}
   - component: {fileID: 1348575860}
-  - component: {fileID: 674228384}
+  - component: {fileID: 8853134746694733961}
   m_Layer: 0
   m_Name: CANON
   m_TagString: Untagged
@@ -134,7 +134,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &674228384
+--- !u!114 &8853134746694733961
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,3 +148,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 759217719}
   bulletPrefab: {fileID: 90326147934424884, guid: 468f4a5e543a6e846b572dbda190777f, type: 3}
+  minDuration: 0.1
+  maxDuration: 3

@@ -420,7 +420,7 @@ MonoBehaviour:
   jumpForce: 4.4
   groundCheckDistance: 23.98
   edgeCheckDistance: 1
-  view_distance: 8
+  view_distance: 2
   isFreezeMovementRoutineActive: 0
   Is_Rage_mode: 0
   Is_On_stunded: 0
@@ -431,7 +431,7 @@ MonoBehaviour:
   animacja_napisu: {fileID: 0}
   freezeDuration: 1
   freezeInterval: 2
-  maxHealth: 150
+  maxHealth: 300
   currentHealth: 0
   healthBar: {fileID: 6521475563291116690}
   Layer:

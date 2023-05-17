@@ -104,9 +104,7 @@ public class robaczek : MonoBehaviour
         if (players.Count >0) //
         {
             isFreezeMovementRoutineActive = false;
-            Is_Rage_mode = true;
-            players[0].gameObject.GetComponent<input_player_movement>().test();
-            
+            Is_Rage_mode = true;            
             horizontalDifference = gameObject.transform.position.x - transform.position.x;
 
             if( players[0].gameObject.transform.position.x > transform.position.x)

@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+
 
 public class input_player_movement : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class input_player_movement : MonoBehaviour
     private bool isOnCooldown = false;
     bool isGrounded;
     public bool isAttack1 = true;
+    public bool death;
 
     public float checkRadius = 0.1f;
 
@@ -45,12 +48,13 @@ public class input_player_movement : MonoBehaviour
 
     void Start()
     {
+        death = false;
         animation_controller = GetComponent<player_animator_controller>();
         //animation_controller.test();
         fizyka = GetComponent<Rigidbody2D>();
         transformacja = GetComponent<Transform>();
         animacja = GetComponent<Animator>();
-
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
         InvokeRepeating("test1",0.0f,0.001f);
 
         currentHealth = maxHealth;
@@ -65,6 +69,8 @@ public class input_player_movement : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, checkRadius, groundLayer);
         healthBar.SetHeath(currentHealth);
+        if (currentHealth == 0 || currentHealth < 0) {death = true; gameObject.GetComponent<CapsuleCollider2D>().enabled = false;  gameObject.GetComponent<BoxCollider2D>().enabled = true; SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
+}
         movement();
         flip();
     }
@@ -73,16 +79,16 @@ public class input_player_movement : MonoBehaviour
 
     void movement()
     {
-        fizyka.velocity = new Vector2(dane_wejscowe.x * przyspiesznie, fizyka.velocity.y);
+        if (!death){fizyka.velocity = new Vector2(dane_wejscowe.x * przyspiesznie, fizyka.velocity.y);}
        
     }
     void flip()
     {
-        if (dane_wejscowe.x < 0)
+        if (dane_wejscowe.x < 0 && !death)
         {
             transformacja.localScale = new Vector2(-4.5f, transformacja.localScale.y);
         }
-        if (dane_wejscowe.x > 0)
+        if (dane_wejscowe.x > 0 && !death)
         {
             transformacja.localScale = new Vector2(4.5f, transformacja.localScale.y);
         }
@@ -135,6 +141,7 @@ public class input_player_movement : MonoBehaviour
             currentHealth = currentHealth - 10;
         }
     }
+    
 }
 
 

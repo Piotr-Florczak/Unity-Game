@@ -6,16 +6,30 @@ public class canon : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject bulletPrefab;
-    public float duration = 0.5f; 
+    public float minDuration = 0.2f; 
+    public float maxDuration = 0.5f;
 
-    // Update is called once per frame
+    // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("Shoot",1.0f,duration);
+        StartCoroutine(ShootLoop());
+        Debug.Log("c");
+
+    }
+
+    IEnumerator ShootLoop()
+    {
+        while (true)
+        {
+            float delay = Random.Range(minDuration, maxDuration);
+            yield return new WaitForSeconds(delay);
+            Shoot();
+        }
     }
 
     void Shoot()
     {
-        Instantiate(bulletPrefab, firePoint.position,firePoint.rotation);
+        Debug.Log("a");
+        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
     }
 }
